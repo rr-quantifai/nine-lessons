@@ -103,6 +103,7 @@
   scene.add(key);
 
   // ---------- Starfield ----------
+  let stars;
   (function(){
     const n = 1500, pos = new Float32Array(n*3);
     for (let i=0;i<n;i++){
@@ -117,7 +118,6 @@
     stars = new THREE.Points(g, new THREE.PointsMaterial({ color:0xffffff, size:0.05, sizeAttenuation:true, transparent:true, opacity:0.85 }));
     scene.add(stars);
   })();
-  let stars = scene.children[scene.children.length-1];
 
   // ---------- Procedural textures ----------
   function makeCtx(w,h){ const c=document.createElement('canvas'); c.width=w; c.height=h; return c.getContext('2d'); }
