@@ -4,140 +4,115 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#141118">
-<title>Nine Lessons I Vedic astrology lessons</title>
+<title>Nine Lessons</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  :root{
-    --bg:#141118; --bg2:#1e1a24; --paper:#FBF7EE; --gold:#C9A961;
-  }
+  :root{--bg:#141118;--gold:#C9A961}
   html,body{height:100%}
   body{
-    background:
-      radial-gradient(120% 80% at 50% 0%, #262031 0%, var(--bg) 60%),
-      var(--bg);
+    background:radial-gradient(120% 80% at 50% 0%, #262031 0%, #141118 60%) #141118;
     font-family:'Cormorant Garamond',Georgia,serif;
     color:#E8E1D4;
-    display:flex; justify-content:center;
+    display:flex;justify-content:center;
     overscroll-behavior:none;
     -webkit-font-smoothing:antialiased;
   }
   body::before{
-    content:''; position:fixed; inset:0; pointer-events:none; z-index:5; opacity:.5;
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:5;opacity:.5;mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-    mix-blend-mode:overlay;
   }
   .app{
-    width:100%; max-width:600px; min-height:100dvh;
-    display:flex; flex-direction:column;
+    width:100%;max-width:600px;min-height:100dvh;display:flex;flex-direction:column;
     padding:max(14px,env(safe-area-inset-top)) 18px max(14px,env(safe-area-inset-bottom));
   }
 
-  /* ---------- header ---------- */
-  header{text-align:center; padding:10px 0 6px; flex:0 0 auto}
-  .rule{display:flex; align-items:center; justify-content:center; gap:10px; color:var(--gold); opacity:.75}
-  .rule span{height:1px; width:44px; background:currentColor}
-  .rule i{font-style:normal; font-size:9px; letter-spacing:.3em}
+  header{text-align:center;padding:10px 0 6px;flex:0 0 auto}
+  .rule{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--gold);opacity:.75}
+  .rule span{height:1px;width:44px;background:currentColor}
+  .rule i{font-style:normal;font-size:9px;letter-spacing:.3em}
   h1{
-    font-family:'Cinzel Decorative',serif; font-weight:700;
-    font-size:clamp(26px,7.4vw,38px); letter-spacing:.06em; line-height:1.1;
-    margin:8px 0 6px;
+    font-family:'Cinzel Decorative',serif;font-weight:700;
+    font-size:clamp(26px,7.4vw,38px);letter-spacing:.06em;line-height:1.1;margin:8px 0 6px;
     background:linear-gradient(180deg,#F6E7BE,#C9A961 55%,#8E6F35);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  .sub{font-family:'Cinzel',serif; font-size:10px; letter-spacing:.34em; text-transform:uppercase; color:#9C93A8}
+  .sub{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:#9C93A8}
 
-  /* ---------- deck ---------- */
-  .deck-wrap{flex:1 1 auto; display:flex; align-items:center; justify-content:center; padding:12px 0}
-  .deck{position:relative; width:100%; max-width:400px; aspect-ratio:59/92; touch-action:none}
+  .deck-wrap{flex:1 1 auto;display:flex;align-items:center;justify-content:center;padding:12px 0;min-height:0}
+  .deck{
+    position:relative;
+    width:min(100%, 400px, calc(70dvh * 59 / 92));
+    aspect-ratio:59/92;
+    touch-action:none;
+  }
 
   .card{
-    position:absolute; inset:0; border-radius:16px; overflow:hidden;
-    background:
-      linear-gradient(165deg,var(--tint) 0%,#FDFAF3 42%,var(--tint) 100%);
-    box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 22px 40px -18px rgba(0,0,0,.8), 0 4px 14px rgba(0,0,0,.45);
+    position:absolute;inset:0;border-radius:16px;overflow:hidden;
+    background:linear-gradient(165deg,var(--tint) 0%,#FDFAF3 42%,var(--tint) 100%);
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 22px 40px -18px rgba(0,0,0,.8),0 4px 14px rgba(0,0,0,.45);
     color:var(--ink);
-    will-change:transform;
-    transform-origin:50% 120%;
-    display:flex; flex-direction:column; align-items:center;
+    will-change:transform;transform-origin:50% 120%;
+    display:flex;flex-direction:column;align-items:center;
     padding:16px 18px 20px;
-    user-select:none; -webkit-user-drag:none;
-    transition:transform .42s cubic-bezier(.22,1,.36,1), opacity .42s ease;
+    user-select:none;-webkit-user-drag:none;
+    transition:transform .42s cubic-bezier(.22,1,.36,1),opacity .42s ease;
   }
   .card.live{transition:none}
-  .card::after{ /* paper grain */
-    content:''; position:absolute; inset:0; pointer-events:none; opacity:.38;
+  .card::after{
+    content:'';position:absolute;inset:0;pointer-events:none;opacity:.38;mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23p)' opacity='.5'/%3E%3C/svg%3E");
-    mix-blend-mode:multiply;
   }
-  .frame{
-    position:absolute; inset:9px; border:1.5px solid var(--ink); border-radius:9px; opacity:.85; pointer-events:none;
-  }
-  .frame::before{content:''; position:absolute; inset:4px; border:.75px solid var(--accent); border-radius:6px; opacity:.7}
-  .corner{position:absolute; width:9px; height:9px; background:var(--accent); transform:rotate(45deg); opacity:.85}
-  .corner.tl{top:-4.5px; left:-4.5px} .corner.tr{top:-4.5px; right:-4.5px}
-  .corner.bl{bottom:-4.5px; left:-4.5px} .corner.br{bottom:-4.5px; right:-4.5px}
+  .frame{position:absolute;inset:9px;border:1.5px solid var(--ink);border-radius:9px;opacity:.85;pointer-events:none}
+  .frame::before{content:'';position:absolute;inset:4px;border:.75px solid var(--accent);border-radius:6px;opacity:.7}
+  .corner{position:absolute;width:9px;height:9px;background:var(--accent);transform:rotate(45deg);opacity:.85}
+  .corner.tl{top:-4.5px;left:-4.5px}.corner.tr{top:-4.5px;right:-4.5px}
+  .corner.bl{bottom:-4.5px;left:-4.5px}.corner.br{bottom:-4.5px;right:-4.5px}
 
-  .num{
-    font-family:'Cinzel',serif; font-size:11px; letter-spacing:.3em; font-weight:600;
-    color:var(--accent); margin-top:8px;
-  }
-  .art{width:100%; flex:1 1 auto; display:flex; align-items:center; justify-content:center; padding:2px 0}
-  .art svg{width:min(74%,232px); height:auto; color:var(--ink); display:block}
-  .name{
-    font-family:'Cinzel',serif; font-weight:600;
-    font-size:clamp(19px,5.6vw,25px); letter-spacing:.16em; text-transform:uppercase;
-    text-align:center; margin-top:2px;
-  }
-  .sanskrit{
-    font-family:'Cinzel',serif; font-size:9.5px; letter-spacing:.34em; text-transform:uppercase;
-    color:var(--accent); margin-top:5px;
-  }
-  .divider{display:flex; align-items:center; gap:8px; margin:11px 0 9px; color:var(--accent); opacity:.9}
-  .divider span{height:1px; width:34px; background:currentColor}
+  .num{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.3em;font-weight:600;color:var(--accent);margin-top:8px}
+  .art{width:100%;flex:1 1 auto;display:flex;align-items:center;justify-content:center;padding:2px 0;min-height:0}
+  .art svg{width:min(74%,232px);height:auto;color:var(--ink);display:block}
+  .name{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(19px,5.6vw,25px);letter-spacing:.16em;text-transform:uppercase;text-align:center;margin-top:2px}
+  .sanskrit{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--accent);margin-top:5px}
+  .divider{display:flex;align-items:center;gap:8px;margin:11px 0 9px;color:var(--accent);opacity:.9}
+  .divider span{height:1px;width:34px;background:currentColor}
   .divider b{font-size:9px}
-  .lesson{
-    font-size:clamp(17px,4.9vw,21px); line-height:1.45; font-style:italic; font-weight:500;
-    text-align:center; max-width:31ch; text-wrap:balance;
-  }
+  .lesson{font-size:clamp(17px,4.9vw,21px);line-height:1.45;font-style:italic;font-weight:500;text-align:center;max-width:31ch}
 
-  /* finished panel */
   .done{
-    position:absolute; inset:0; border-radius:16px; display:none;
-    flex-direction:column; align-items:center; justify-content:center; gap:16px; text-align:center;
-    border:1px solid rgba(201,169,97,.35); background:linear-gradient(165deg,#221d2b,#17141c);
-    padding:30px;
+    position:absolute;inset:0;border-radius:16px;display:none;
+    flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;
+    border:1px solid rgba(201,169,97,.35);
+    background:linear-gradient(165deg,#221d2b,#17141c);padding:30px;z-index:1;
   }
   .done.show{display:flex}
-  .done h2{font-family:'Cinzel Decorative',serif; font-size:24px; color:var(--gold); font-weight:400; letter-spacing:.05em}
-  .done p{font-size:18px; font-style:italic; color:#B8AFC2; max-width:24ch; line-height:1.5}
+  .done h2{font-family:'Cinzel Decorative',serif;font-size:24px;color:var(--gold);font-weight:400;letter-spacing:.05em}
+  .done p{font-size:18px;font-style:italic;color:#B8AFC2;max-width:24ch;line-height:1.5}
 
-  /* ---------- footer ---------- */
-  footer{flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:14px; padding-top:4px}
-  .pips{display:flex; gap:9px}
-  .pip{width:7px; height:7px; transform:rotate(45deg); border:1px solid rgba(201,169,97,.55); transition:background .3s ease, transform .3s ease}
-  .pip.on{background:var(--gold); transform:rotate(45deg) scale(1.18)}
-  .controls{display:flex; align-items:center; gap:12px}
+  footer{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:4px}
+  .pips{display:flex;gap:9px}
+  .pip{width:7px;height:7px;transform:rotate(45deg);border:1px solid rgba(201,169,97,.55);transition:background .3s ease,transform .3s ease}
+  .pip.on{background:var(--gold);transform:rotate(45deg) scale(1.18)}
+  .controls{display:flex;align-items:center;gap:12px}
   button{
-    font-family:'Cinzel',serif; font-size:10px; letter-spacing:.22em; text-transform:uppercase;
-    color:#E3D8BE; background:rgba(255,255,255,.05); border:1px solid rgba(201,169,97,.4);
-    padding:11px 20px; border-radius:999px; cursor:pointer;
-    transition:background .2s, opacity .2s, transform .1s;
+    font-family:'Cinzel',serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:#E3D8BE;background:rgba(255,255,255,.05);border:1px solid rgba(201,169,97,.4);
+    padding:11px 20px;border-radius:999px;cursor:pointer;
+    transition:background .2s,opacity .2s,transform .1s;
   }
   button:active{transform:scale(.96)}
-  button:disabled{opacity:.3}
-  button.primary{background:linear-gradient(180deg,#C9A961,#9A7A3A); color:#1B1620; border-color:transparent; font-weight:600}
-  .hint{font-size:14px; font-style:italic; color:#8B melhoria}
-  .hint{color:#8B839A; letter-spacing:.02em}
-  .hint.hide{opacity:0; transition:opacity .4s}
+  button:disabled{opacity:.3;cursor:default}
+  button.primary{background:linear-gradient(180deg,#C9A961,#9A7A3A);color:#1B1620;border-color:transparent;font-weight:600}
+  .hint{font-size:14px;font-style:italic;color:#8B839A;transition:opacity .4s}
+  .hint.hide{opacity:0}
 </style>
 </head>
 <body>
 <div class="app">
   <header>
-    <div class="rule"><span></span><i>✦</i><span></span></div>
+    <div class="rule"><span></span><i>&#10022;</i><span></span></div>
     <h1>Nine Lessons</h1>
     <div class="sub">Teachings of the Navagraha</div>
   </header>
@@ -155,281 +130,340 @@
   <footer>
     <div class="pips" id="pips"></div>
     <div class="controls">
-      <button id="undo" disabled>↺ Back</button>
-      <button id="next">Next ›</button>
+      <button id="undo" disabled>&#8630; Back</button>
+      <button id="next">Next &rsaquo;</button>
     </div>
     <div class="hint" id="hint">Flick a card aside to continue</div>
   </footer>
 </div>
 
 <script>
+(function(){
+"use strict";
+
 /* ------------------------------------------------------------------ data */
-const PLANETS = [
-  {key:'saturn', name:'Saturn', sans:'Shani',       lesson:'Maintain discipline in life.',                     ink:'#232A4A', accent:'#5566A0', tint:'#EBEDF7'},
-  {key:'ketu',   name:'Ketu',   sans:'Ketu',        lesson:'Learn to say no to people sometimes.',             ink:'#33393C', accent:'#7A8386', tint:'#EDF0F0'},
-  {key:'sun',    name:'Sun',    sans:'Surya',       lesson:'Do not be available to everyone at all times.',    ink:'#7A3F12', accent:'#CE8A2A', tint:'#FBF0DC'},
-  {key:'moon',   name:'Moon',   sans:'Chandra',     lesson:'Do not remain emotionally attached to everyone.',  ink:'#2F4560', accent:'#86A4C6', tint:'#EDF2F8'},
-  {key:'mercury',name:'Mercury',sans:'Budha',       lesson:'Do not speak unnecessarily among people.',         ink:'#17513E', accent:'#3E8F6C', tint:'#E8F3ED'},
-  {key:'jupiter',name:'Jupiter',sans:'Brihaspati',  lesson:'Do not give free advice to everyone.',             ink:'#6B4E10', accent:'#C0982A', tint:'#FAF2D8'},
-  {key:'rahu',   name:'Rahu',   sans:'Rahu',        lesson:'Do not develop any kind of addiction.',            ink:'#43214F', accent:'#7E4A93', tint:'#F2EAF6'},
-  {key:'venus',  name:'Venus',  sans:'Shukra',      lesson:'Wear good and clean clothes.',                     ink:'#7A2A4A', accent:'#CE6E92', tint:'#FCEAF1'},
-  {key:'mars',   name:'Mars',   sans:'Mangala',     lesson:'Keep your body fit.',                              ink:'#7A2118', accent:'#B8493A', tint:'#FBE9E4'}
+var PLANETS = [
+  {key:'saturn', name:'Saturn', sans:'Shani',      lesson:'Maintain discipline in life.',                    ink:'#232A4A', accent:'#5566A0', tint:'#EBEDF7'},
+  {key:'ketu',   name:'Ketu',   sans:'Ketu',       lesson:'Learn to say no to people sometimes.',            ink:'#33393C', accent:'#7A8386', tint:'#EDF0F0'},
+  {key:'sun',    name:'Sun',    sans:'Surya',      lesson:'Do not be available to everyone at all times.',   ink:'#7A3F12', accent:'#CE8A2A', tint:'#FBF0DC'},
+  {key:'moon',   name:'Moon',   sans:'Chandra',    lesson:'Do not remain emotionally attached to everyone.', ink:'#2F4560', accent:'#86A4C6', tint:'#EDF2F8'},
+  {key:'mercury',name:'Mercury',sans:'Budha',      lesson:'Do not speak unnecessarily among people.',        ink:'#17513E', accent:'#3E8F6C', tint:'#E8F3ED'},
+  {key:'jupiter',name:'Jupiter',sans:'Guru',       lesson:'Do not give free advice to everyone.',            ink:'#6B4E10', accent:'#C0982A', tint:'#FAF2D8'},
+  {key:'rahu',   name:'Rahu',   sans:'Rahu',       lesson:'Do not develop any kind of addiction.',           ink:'#43214F', accent:'#7E4A93', tint:'#F2EAF6'},
+  {key:'venus',  name:'Venus',  sans:'Shukra',     lesson:'Wear good and clean clothes.',                    ink:'#7A2A4A', accent:'#CE6E92', tint:'#FCEAF1'},
+  {key:'mars',   name:'Mars',   sans:'Mangala',    lesson:'Keep your body fit.',                             ink:'#7A2118', accent:'#B8493A', tint:'#FBE9E4'}
 ];
-const ROMAN = ['I','II','III','IV','V','VI','VII','VIII','IX'];
+var ROMAN = ['I','II','III','IV','V','VI','VII','VIII','IX'];
 
-/* ------------------------------------------------------- engraved artwork */
-const G = {  /* glyphs drawn inside a 100×100 box */
-  saturn : `<path d="M34,16 V50"/><path d="M18,29 H50"/><path d="M34,50 C34,72 52,58 63,68 C73,77 68,90 55,88"/>`,
-  ketu   : `<path d="M26,32 C26,76 74,76 74,32"/><circle cx="26" cy="24" r="7.5"/><circle cx="74" cy="24" r="7.5"/>`,
-  sun    : `<circle cx="50" cy="50" r="29"/><circle cx="50" cy="50" r="6.5" fill="currentColor"/>`,
-  moon   : `<path d="M63,20 A32,32 0 1 0 63,80 A25,25 0 1 1 63,20 Z" fill="currentColor" stroke="none"/>`,
-  mercury: `<path d="M33,24 A17,17 0 0 0 67,24"/><circle cx="50" cy="52" r="18"/><path d="M50,70 V92"/><path d="M34,82 H66"/>`,
-  jupiter: `<path d="M62,17 C40,17 29,29 32,44"/><path d="M62,17 V78"/><path d="M28,63 H82"/>`,
-  rahu   : `<path d="M26,76 C26,32 74,32 74,76"/><circle cx="26" cy="84" r="7.5"/><circle cx="74" cy="84" r="7.5"/>`,
-  venus  : `<circle cx="50" cy="36" r="20"/><path d="M50,56 V90"/><path d="M32,75 H68"/>`,
-  mars   : `<circle cx="41" cy="60" r="22"/><path d="M57,44 L83,18"/><path d="M83,18 H65"/><path d="M83,18 V36"/>`
-};
+/* --------------------------------------------------------- svg utilities */
+function line(x1,y1,x2,y2,w,o){
+  return '<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+
+         '" y2="'+y2.toFixed(1)+'" stroke-width="'+w+'" opacity="'+o+'"/>';
+}
+function star(cx,cy,s,o){
+  var q = s*0.2;
+  return '<path d="M'+cx+','+(cy-s)+' Q'+(cx+q)+','+(cy-q)+' '+(cx+s)+','+cy+
+         ' Q'+(cx+q)+','+(cy+q)+' '+cx+','+(cy+s)+
+         ' Q'+(cx-q)+','+(cy+q)+' '+(cx-s)+','+cy+
+         ' Q'+(cx-q)+','+(cy-q)+' '+cx+','+(cy-s)+' Z" fill="currentColor" stroke="none" opacity="'+o+'"/>';
+}
+function spokes(count,r1,r2,w,o){
+  var s='', step=360/count, i, a;
+  for(i=0;i<count;i++){
+    a = i*step*Math.PI/180;
+    s += line(150+Math.cos(a)*r1, 150+Math.sin(a)*r1, 150+Math.cos(a)*r2, 150+Math.sin(a)*r2, w, o);
+  }
+  return s;
+}
+function border(){
+  var s='', i, a, big, r2;
+  for(i=0;i<72;i++){
+    a = i*5*Math.PI/180; big = (i%3===0); r2 = big?129:118;
+    s += line(150+Math.cos(a)*93, 150+Math.sin(a)*93, 150+Math.cos(a)*r2, 150+Math.sin(a)*r2, big?2:1, big?0.5:0.28);
+  }
+  return s;
+}
 
-const star = (cx,cy,s,o=.55) =>
- `<path d="M${cx},${cy-s} Q${cx+s*.2},${cy-s*.2} ${cx+s},${cy} Q${cx+s*.2},${cy+s*.2} ${cx},${cy+s} Q${cx-s*.2},${cy+s*.2} ${cx-s},${cy} Q${cx-s*.2},${cy-s*.2} ${cx},${cy-s} Z" fill="currentColor" stroke="none" opacity="${o}"/>`;
+/* central astrological glyph, drawn in a 100x100 box */
+function glyph(key){
+  switch(key){
+    case 'saturn':  return '<path d="M34,16 V50"/><path d="M18,29 H50"/><path d="M34,50 C34,72 52,58 63,68 C73,77 68,90 55,88"/>';
+    case 'ketu':    return '<path d="M26,32 C26,76 74,76 74,32"/><circle cx="26" cy="24" r="7.5"/><circle cx="74" cy="24" r="7.5"/>';
+    case 'sun':     return '<circle cx="50" cy="50" r="29"/><circle cx="50" cy="50" r="6.5" fill="currentColor"/>';
+    case 'moon':    return '<path d="M63,20 A32,32 0 1 0 63,80 A25,25 0 1 1 63,20 Z" fill="currentColor" stroke="none"/>';
+    case 'mercury': return '<path d="M33,24 A17,17 0 0 0 67,24"/><circle cx="50" cy="52" r="18"/><path d="M50,70 V92"/><path d="M34,82 H66"/>';
+    case 'jupiter': return '<path d="M62,17 C40,17 29,29 32,44"/><path d="M62,17 V78"/><path d="M28,63 H82"/>';
+    case 'rahu':    return '<path d="M26,76 C26,32 74,32 74,76"/><circle cx="26" cy="84" r="7.5"/><circle cx="74" cy="84" r="7.5"/>';
+    case 'venus':   return '<circle cx="50" cy="36" r="20"/><path d="M50,56 V90"/><path d="M32,75 H68"/>';
+    case 'mars':    return '<circle cx="41" cy="60" r="22"/><path d="M57,44 L83,18"/><path d="M83,18 H65"/><path d="M83,18 V36"/>';
+  }
+  return '';
+}
 
-const MOTIF = {
-  saturn : `<ellipse cx="150" cy="150" rx="72" ry="23" transform="rotate(-19 150 150)" opacity=".5"/>
-            <ellipse cx="150" cy="150" rx="60" ry="18" transform="rotate(-19 150 150)" opacity=".3"/>`,
-  ketu   : `<path d="M78,224 Q150,150 224,76" stroke-dasharray="3 9" opacity=".5"/>${star(212,90,7)}${star(92,208,5,.4)}`,
-  sun    : (()=>{let s='';for(let k=0;k<24;k++){const a=k*15*Math.PI/180;s+=`<line x1="${(150+Math.cos(a)*58).toFixed(1)}" y1="${(150+Math.sin(a)*58).toFixed(1)}" x2="${(150+Math.cos(a)*73).toFixed(1)}" y2="${(150+Math.sin(a)*73).toFixed(1)}" opacity=".38" stroke-width="1.6"/>`}return s})(),
-  moon   : `${star(96,104,8)}${star(206,196,6)}${star(112,206,5,.4)}`,
-  mercury: `<path d="M88,128 Q112,106 136,116" opacity=".45"/><path d="M212,128 Q188,106 164,116" opacity=".45"/>`,
-  jupiter: `<path d="M110,214 Q150,182 190,214" opacity=".45"/><path d="M92,208 Q150,170 208,208" opacity=".28"/>`,
-  rahu   : `<circle cx="176" cy="132" r="62" opacity=".28"/><path d="M96,150 A54,54 0 0 1 204,150" stroke-dasharray="2 7" opacity=".4"/>`,
-  venus  : (()=>{let s='';for(let k=0;k<8;k++){const a=k*45*Math.PI/180;s+=`<line x1="${(150+Math.cos(a)*46).toFixed(1)}" y1="${(150+Math.sin(a)*46).toFixed(1)}" x2="${(150+Math.cos(a)*76).toFixed(1)}" y2="${(150+Math.sin(a)*76).toFixed(1)}" opacity=".3"/>`}return s+star(150,74,9,.45)})(),
-  mars   : `<path d="M74,226 L226,74" opacity=".3"/><path d="M74,74 L226,226" opacity=".18"/>${star(222,78,7,.5)}`
-};
+/* per-planet supporting motif, drawn in the 300x300 medallion */
+function motif(key){
+  switch(key){
+    case 'saturn':
+      return '<ellipse cx="150" cy="150" rx="72" ry="23" transform="rotate(-19 150 150)" opacity=".5"/>' +
+             '<ellipse cx="150" cy="150" rx="60" ry="18" transform="rotate(-19 150 150)" opacity=".3"/>';
+    case 'ketu':
+      return '<path d="M78,224 Q150,150 224,76" stroke-dasharray="3 9" opacity=".5"/>' + star(212,90,7,.55) + star(92,208,5,.4);
+    case 'sun':
+      return spokes(24,58,73,1.6,.38);
+    case 'moon':
+      return star(96,104,8,.55) + star(206,196,6,.55) + star(112,206,5,.4);
+    case 'mercury':
+      return '<path d="M88,128 Q112,106 136,116" opacity=".45"/><path d="M212,128 Q188,106 164,116" opacity=".45"/>';
+    case 'jupiter':
+      return '<path d="M110,214 Q150,182 190,214" opacity=".45"/><path d="M92,208 Q150,170 208,208" opacity=".28"/>';
+    case 'rahu':
+      return '<circle cx="176" cy="132" r="62" opacity=".28"/><path d="M96,150 A54,54 0 0 1 204,150" stroke-dasharray="2 7" opacity=".4"/>';
+    case 'venus':
+      return spokes(8,46,76,1.6,.3) + star(150,74,9,.45);
+    case 'mars':
+      return '<path d="M74,226 L226,74" opacity=".3"/><path d="M74,74 L226,226" opacity=".18"/>' + star(222,78,7,.5);
+  }
+  return '';
+}
 
 function artwork(p,i){
-  let rays='';
-  for(let k=0;k<72;k++){
-    const a = k*5*Math.PI/180, big = k%3===0;
-    const r1=93, r2 = big?129:118;
-    rays += `<line x1="${(150+Math.cos(a)*r1).toFixed(1)}" y1="${(150+Math.sin(a)*r1).toFixed(1)}" x2="${(150+Math.cos(a)*r2).toFixed(1)}" y2="${(150+Math.sin(a)*r2).toFixed(1)}" stroke-width="${big?2:1}" opacity="${big?.5:.28}"/>`;
-  }
-  return `
-  <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-       stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-    <defs>
-      <pattern id="h${i}" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">
-        <line x1="0" y1="0" x2="0" y2="7" stroke="currentColor" stroke-width="1.1"/>
-      </pattern>
-      <clipPath id="c${i}"><circle cx="150" cy="150" r="85"/></clipPath>
-    </defs>
-    <g stroke-width="1.4">${rays}</g>
-    <circle cx="150" cy="150" r="140" stroke-width="1.6" opacity=".5"/>
-    <circle cx="150" cy="150" r="134" stroke-width=".8" opacity=".35"/>
-    <circle cx="150" cy="150" r="85" stroke-width="3"/>
-    <circle cx="150" cy="150" r="78" stroke-width=".9" opacity=".55"/>
-    <g clip-path="url(#c${i})">
-      <rect x="60" y="158" width="180" height="92" fill="url(#h${i})" stroke="none" opacity=".2"/>
-    </g>
-    <g stroke-width="1.8">${MOTIF[p.key]}</g>
-    <g transform="translate(100,100)">${G[p.key]}</g>
-  </svg>`;
+  return '<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" ' +
+         'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' +
+           '<defs>' +
+             '<pattern id="h'+i+'" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">' +
+               '<line x1="0" y1="0" x2="0" y2="7" stroke="currentColor" stroke-width="1.1"/>' +
+             '</pattern>' +
+             '<clipPath id="c'+i+'"><circle cx="150" cy="150" r="85"/></clipPath>' +
+           '</defs>' +
+           '<g stroke-width="1.4">' + border() + '</g>' +
+           '<circle cx="150" cy="150" r="140" stroke-width="1.6" opacity=".5"/>' +
+           '<circle cx="150" cy="150" r="134" stroke-width=".8" opacity=".35"/>' +
+           '<circle cx="150" cy="150" r="85" stroke-width="3"/>' +
+           '<circle cx="150" cy="150" r="78" stroke-width=".9" opacity=".55"/>' +
+           '<g clip-path="url(#c'+i+')">' +
+             '<rect x="60" y="158" width="180" height="92" fill="url(#h'+i+')" stroke="none" opacity=".2"/>' +
+           '</g>' +
+           '<g stroke-width="1.8">' + motif(p.key) + '</g>' +
+           '<g transform="translate(100,100)">' + glyph(p.key) + '</g>' +
+         '</svg>';
 }
 
 /* ------------------------------------------------------------- build deck */
-const deck  = document.getElementById('deck');
-const doneP = document.getElementById('done');
-const pips  = document.getElementById('pips');
-const hint  = document.getElementById('hint');
-const btnUndo = document.getElementById('undo');
-const btnNext = document.getElementById('next');
-const els = [];
+var deck   = document.getElementById('deck');
+var doneP  = document.getElementById('done');
+var pips   = document.getElementById('pips');
+var hint   = document.getElementById('hint');
+var btnUndo= document.getElementById('undo');
+var btnNext= document.getElementById('next');
+var els = [];
 
-PLANETS.forEach((p,i)=>{
-  const el = document.createElement('article');
+PLANETS.forEach(function(p,i){
+  var el = document.createElement('article');
   el.className = 'card';
   el.style.setProperty('--ink',p.ink);
   el.style.setProperty('--accent',p.accent);
   el.style.setProperty('--tint',p.tint);
-  el.innerHTML = `
-    <div class="frame"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></div>
-    <div class="num">${ROMAN[i]}</div>
-    <div class="art">${artwork(p,i)}</div>
-    <div class="name">${p.name}</div>
-    <div class="sanskrit">${p.sans}</div>
-    <div class="divider"><span></span><b>✦</b><span></span></div>
-    <div class="lesson">${p.lesson}</div>`;
+  el.innerHTML =
+    '<div class="frame"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></div>' +
+    '<div class="num">'+ROMAN[i]+'</div>' +
+    '<div class="art">'+artwork(p,i)+'</div>' +
+    '<div class="name">'+p.name+'</div>' +
+    '<div class="sanskrit">'+p.sans+'</div>' +
+    '<div class="divider"><span></span><b>&#10022;</b><span></span></div>' +
+    '<div class="lesson">'+p.lesson+'</div>';
   deck.insertBefore(el, doneP);
   els.push(el);
 
-  const pip = document.createElement('i');
+  var pip = document.createElement('i');
   pip.className = 'pip';
   pips.appendChild(pip);
 });
 
-/* ------------------------------------------------------------- physics ✦ */
-let cur = 0;
-let x = 0, y = 0, rot = 0;          // top-card state
-let vx = 0, vy = 0, vr = 0;         // velocity, px per frame
-let mode = null;                    // 'fly' | 'spring'
-let raf = null, lastT = 0;
-let drag = null;
+/* --------------------------------------------------------------- physics */
+var cur = 0;
+var x=0, y=0, rot=0;        // top card position
+var vx=0, vy=0, vr=0;       // velocity, per frame
+var mode=null, raf=null, lastT=0, drag=null;
 
-const SPRING_K = 0.155;   // stiffness
-const SPRING_C = 0.72;    // damping  (ζ ≈ 0.91 — snappy, tiny overshoot)
-const GRAVITY  = 0.55;    // px/frame² once the card is airborne
-const AIR      = 0.992;   // horizontal drag
+var SPRING_K = 0.155;   // stiffness
+var SPRING_C = 0.72;    // damping (zeta ~ 0.91)
+var GRAVITY  = 0.55;    // px per frame^2
+var AIR      = 0.992;
 
 function top(){ return els[cur] || null; }
+function threshold(){ return deck.clientWidth * 0.30; }
 
-function layout(prog = 0){
-  els.forEach((el,i)=>{
-    const d = i - cur;
-    if(d < 0){ el.style.display = 'none'; return; }
+function layout(prog){
+  prog = prog || 0;
+  els.forEach(function(el,i){
+    var d = i - cur, depth;
+    if(d < 0){ el.style.display='none'; return; }
     el.style.display = '';
     if(d === 0){
       el.style.zIndex = 100;
       el.style.opacity = 1;
-      el.style.transform = `translate3d(${x}px,${y}px,0) rotate(${rot}deg)`;
+      el.style.transform = 'translate3d('+x+'px,'+y+'px,0) rotate('+rot+'deg)';
       return;
     }
-    const depth = Math.max(0, d - prog);
+    depth = Math.max(0, d - prog);
     el.style.zIndex = 100 - d;
-    el.style.opacity = d > 2 ? 0 : 1;
-    el.style.transform =
-      `translate3d(0,${(depth*15).toFixed(2)}px,0) scale(${(1-depth*0.05).toFixed(4)}) rotate(${((i%2?1:-1)*depth*1.7).toFixed(2)}deg)`;
+    el.style.opacity = (d > 2) ? 0 : 1;
+    el.style.transform = 'translate3d(0,'+(depth*15).toFixed(2)+'px,0) scale('+
+      (1-depth*0.05).toFixed(4)+') rotate('+((i%2?1:-1)*depth*1.7).toFixed(2)+'deg)';
   });
 }
 
 function loop(t){
-  const dt = Math.min(2.2, (t - lastT) / 16.667) || 1;  // frames elapsed
+  var dt = Math.min(2.2, (t-lastT)/16.667) || 1;
+  var card;
   lastT = t;
 
   if(mode === 'fly'){
     vx *= Math.pow(AIR, dt);
     vy += GRAVITY * dt;
-    x += vx * dt; y += vy * dt; rot += vr * dt;
-    const card = top();
-    if(card) card.style.transform = `translate3d(${x}px,${y}px,0) rotate(${rot}deg)`;
-    if(Math.abs(x) > innerWidth + 500 || y > innerHeight + 600){
-      settle();
-      return;
-    }
+    x += vx*dt; y += vy*dt; rot += vr*dt;
+    card = top();
+    if(card) card.style.transform = 'translate3d('+x+'px,'+y+'px,0) rotate('+rot+'deg)';
+    if(Math.abs(x) > window.innerWidth + 500 || y > window.innerHeight + 600){ settle(); return; }
   } else if(mode === 'spring'){
-    // damped harmonic oscillator toward (0,0,0)
-    vx += (-SPRING_K * x - SPRING_C * vx) * dt;
-    vy += (-SPRING_K * y - SPRING_C * vy) * dt;
-    vr += (-SPRING_K * rot - SPRING_C * vr) * dt;
-    x += vx * dt; y += vy * dt; rot += vr * dt;
-    layout(Math.min(1, Math.abs(x) / threshold()));
-    if(Math.hypot(x,y) < 0.4 && Math.abs(vx) < 0.4 && Math.abs(rot) < 0.3){
-      x = y = rot = vx = vy = vr = 0;
-      mode = null; layout(); raf = null; return;
+    vx += (-SPRING_K*x   - SPRING_C*vx) * dt;
+    vy += (-SPRING_K*y   - SPRING_C*vy) * dt;
+    vr += (-SPRING_K*rot - SPRING_C*vr) * dt;
+    x += vx*dt; y += vy*dt; rot += vr*dt;
+    layout(Math.min(1, Math.abs(x)/threshold()));
+    if(Math.abs(x)<0.4 && Math.abs(y)<0.4 && Math.abs(vx)<0.4 && Math.abs(rot)<0.3){
+      x=y=rot=vx=vy=vr=0; mode=null; layout(); raf=null; return;
     }
   } else { raf = null; return; }
 
   raf = requestAnimationFrame(loop);
 }
+
 function start(m){
   mode = m; lastT = performance.now();
-  const card = top(); if(card) card.classList.add('live');
+  var card = top();
+  if(card) card.classList.add('live');
   if(!raf) raf = requestAnimationFrame(loop);
 }
+
 function settle(){
-  const card = top();
-  if(card){ card.classList.remove('live'); card.style.display = 'none'; }
-  cur = Math.min(cur + 1, els.length);
-  x = y = rot = vx = vy = vr = 0; mode = null; raf = null;
-  const nt = top(); if(nt) nt.classList.remove('live');
+  var card = top(), nt;
+  if(card){ card.classList.remove('live'); card.style.display='none'; }
+  cur = Math.min(cur+1, els.length);
+  x=y=rot=vx=vy=vr=0; mode=null; raf=null;
+  nt = top();
+  if(nt) nt.classList.remove('live');
   layout(); sync();
 }
-function threshold(){ return deck.clientWidth * 0.30; }
 
-/* ------------------------------------------------------------ gestures ✦ */
-deck.addEventListener('pointerdown', e=>{
+/* -------------------------------------------------------------- gestures */
+deck.addEventListener('pointerdown', function(e){
   if(cur >= els.length) return;
-  const card = top(); if(!card || e.target.closest('button')) return;
-  if(raf) cancelAnimationFrame(raf); raf = null; mode = null;
-  card.setPointerCapture(e.pointerId);
+  var card = top(), r;
+  if(!card) return;
+  if(e.target.closest && e.target.closest('button')) return;
+  if(raf){ cancelAnimationFrame(raf); raf=null; }
+  mode = null;
+  try{ card.setPointerCapture(e.pointerId); }catch(err){}
   card.classList.add('live');
-  const r = deck.getBoundingClientRect();
+  r = deck.getBoundingClientRect();
   drag = {
-    id:e.pointerId, sx:e.clientX - x, sy:e.clientY - y,
+    id:e.pointerId,
+    sx:e.clientX - x, sy:e.clientY - y,
     upper:(e.clientY - r.top) < r.height/2,
-    px:e.clientX, py:e.clientY, pt:performance.now(), vx:0, vy:0
+    px:e.clientX, py:e.clientY, pt:performance.now(),
+    vx:0, vy:0
   };
   hint.classList.add('hide');
 });
-deck.addEventListener('pointermove', e=>{
+
+deck.addEventListener('pointermove', function(e){
   if(!drag || e.pointerId !== drag.id) return;
-  const now = performance.now(), dt = Math.max(8, now - drag.pt);
-  drag.vx = (e.clientX - drag.px) / dt;      // px per ms
-  drag.vy = (e.clientY - drag.py) / dt;
+  var now = performance.now(), dt = Math.max(8, now - drag.pt);
+  drag.vx = (e.clientX - drag.px)/dt;   // px per ms
+  drag.vy = (e.clientY - drag.py)/dt;
   drag.px = e.clientX; drag.py = e.clientY; drag.pt = now;
 
   x = e.clientX - drag.sx;
   y = (e.clientY - drag.sy) * 0.55;
-  rot = (x / deck.clientWidth) * 15 * (drag.upper ? 1 : -1);
-  layout(Math.min(1, Math.abs(x) / threshold()));
+  rot = (x/deck.clientWidth) * 15 * (drag.upper ? 1 : -1);
+  layout(Math.min(1, Math.abs(x)/threshold()));
 });
+
 function release(e){
   if(!drag || (e && e.pointerId !== drag.id)) return;
-  const V = drag.vx * 16.667;                 // → px per frame
-  const flung = Math.abs(drag.vx) > 0.42 || Math.abs(x) > threshold();
+  var velX = drag.vx * 16.667;          // px per frame
+  var velY = drag.vy * 16.667;
+  var flung = Math.abs(drag.vx) > 0.42 || Math.abs(x) > threshold();
+  var dir;
   drag = null;
   if(flung){
-    const dir = (Math.abs(drag_vx_fallback(V)) > 1 ? Math.sign(V) : Math.sign(x)) || 1;
-    vx = Math.abs(V) > 9 ? V : dir * 15;
-    vy = drag_vy(e) ;
-    vr = (Math.random()*0.4 + 0.5) * dir * (Math.abs(vx)/16);
+    dir = (Math.abs(velX) > 1 ? (velX < 0 ? -1 : 1) : (x < 0 ? -1 : 1)) || 1;
+    vx = (Math.abs(velX) > 9) ? velX : dir * 15;
+    vy = Math.max(-26, Math.min(26, velY)) - 2;
+    vr = dir * (0.5 + Math.random()*0.4) * (Math.abs(vx)/16);
     start('fly');
-  } else { start('spring'); }
+  } else {
+    start('spring');
+  }
 }
-let _lastVy = 0;
-function drag_vx_fallback(v){ return v; }
-function drag_vy(){ return _lastVy; }
-deck.addEventListener('pointerup', e=>{ _lastVy = 0; release(e); });
-deck.addEventListener('pointercancel', e=>{ if(drag){ drag=null; start('spring'); } });
+deck.addEventListener('pointerup', release);
+deck.addEventListener('pointercancel', function(){
+  if(drag){ drag = null; start('spring'); }
+});
 
 /* ------------------------------------------------------- buttons & state */
 function fling(dir){
+  var card;
   if(cur >= els.length || drag) return;
-  const card = top(); if(!card) return;
+  card = top();
+  if(!card) return;
   card.classList.add('live');
-  vx = dir * 17; vy = -3.5; vr = dir * 1.1;
+  vx = dir*17; vy = -3.5; vr = dir*1.1;
   hint.classList.add('hide');
   start('fly');
 }
+
 function undo(){
+  var card;
   if(cur === 0 || drag) return;
-  if(raf) cancelAnimationFrame(raf); raf = null;
+  if(raf){ cancelAnimationFrame(raf); raf = null; }
   cur--;
-  const card = top();
-  card.style.display = ''; card.classList.add('live');
-  x = -(innerWidth * 0.9); y = -40; rot = -22; vx = vy = vr = 0;
+  card = top();
+  card.style.display = '';
+  card.classList.add('live');
+  x = -(window.innerWidth * 0.9); y = -40; rot = -22;
+  vx = vy = vr = 0;
   layout(); sync();
   start('spring');
 }
+
 function sync(){
-  [...pips.children].forEach((p,i)=> p.classList.toggle('on', i < cur));
-  btnUndo.disabled = cur === 0;
-  btnNext.disabled = cur >= els.length;
+  var kids = pips.children, i;
+  for(i=0;i<kids.length;i++){ kids[i].classList.toggle('on', i < cur); }
+  btnUndo.disabled = (cur === 0);
+  btnNext.disabled = (cur >= els.length);
   doneP.classList.toggle('show', cur >= els.length);
 }
-btnNext.addEventListener('click', ()=> fling(1));
+
+btnNext.addEventListener('click', function(){ fling(1); });
 btnUndo.addEventListener('click', undo);
-document.getElementById('again').addEventListener('click', ()=>{
-  cur = 0; x = y = rot = vx = vy = vr = 0;
-  els.forEach(el=>{ el.style.display=''; el.classList.remove('live'); });
-  layout(); sync(); hint.classList.remove('hide');
+document.getElementById('again').addEventListener('click', function(){
+  cur = 0; x=y=rot=vx=vy=vr=0;
+  els.forEach(function(el){ el.style.display=''; el.classList.remove('live'); });
+  layout(); sync();
+  hint.classList.remove('hide');
 });
-addEventListener('keydown', e=>{
+window.addEventListener('keydown', function(e){
   if(e.key === 'ArrowRight') fling(1);
   if(e.key === 'ArrowLeft')  fling(-1);
   if(e.key === 'Backspace')  undo();
 });
-addEventListener('resize', ()=> layout());
+window.addEventListener('resize', function(){ layout(); });
 
-layout(); sync();
+layout();
+sync();
+})();
 </script>
 </body>
 </html>
