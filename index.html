@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#141118">
-<title>Nine Lessons I Vedic astrology lessons</title>
+<title>Nine Lessons I Teachings of the navagraha</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
@@ -105,6 +105,8 @@
 </div>
 
 <script>
+(function(){
+"use strict";
 /* ------------------------------------------------------------------ data */
 const PLANETS = [
   {key:'saturn', name:'Saturn', sans:'Shani',       lesson:"Be disciplined",                  ink:'#232A4A', accent:'#5566A0', tint:'#EBEDF7'},
@@ -331,8 +333,7 @@ function threshold(){ return deck.clientWidth * 0.30; }
 
 /* ------------------------------------------------------------ gestures ✦ */
 deck.addEventListener('pointerdown', e=>{
-  if(cur >= els.length) return;
-  const card = top(); if(!card || e.target.closest('button')) return;
+  const card = top(); if(!card) return;
   if(raf) cancelAnimationFrame(raf); raf = null; mode = null;
   card.setPointerCapture(e.pointerId);
   card.classList.add('live');
@@ -387,6 +388,7 @@ addEventListener('keydown', e=>{
 addEventListener('resize', ()=> layout());
 
 layout();
+})();
 </script>
 </body>
 </html>
