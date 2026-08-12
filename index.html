@@ -7,18 +7,15 @@
 <title>Nine Lessons I Navagraha teachings</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  :root{
-    --bg:#141118; --bg2:#1e1a24; --paper:#FBF7EE; --gold:#C9A961;
-  }
+  :root{ --bg:#141118 }
   html{
     height:100%;
     background:
       radial-gradient(120% 80% at 50% 0%, #262031 0%, var(--bg) 60%),
       var(--bg);
-    background-attachment:fixed;
   }
   body{
     height:100%; overflow:hidden;
@@ -344,9 +341,13 @@ function threshold(){ return deck.clientWidth * 0.30; }
 
 /* ------------------------------------------------------------ gestures ✦ */
 deck.addEventListener('pointerdown', e=>{
+  if(raf) cancelAnimationFrame(raf);
+  raf = null;
+  if(mode === 'fly') settle();          // finish the discard, then grab the next card
+  mode = null;
+
   const card = top(); if(!card) return;
-  if(raf) cancelAnimationFrame(raf); raf = null; mode = null;
-  card.setPointerCapture(e.pointerId);
+  try{ card.setPointerCapture(e.pointerId); }catch(err){}
   card.classList.add('live');
   const r = deck.getBoundingClientRect();
   drag = {
@@ -382,11 +383,11 @@ function release(e){
   } else { start('spring'); }
 }
 deck.addEventListener('pointerup', release);
-deck.addEventListener('pointercancel', e=>{ if(drag){ drag=null; start('spring'); } });
+deck.addEventListener('pointercancel', ()=>{ if(drag){ drag=null; start('spring'); } });
 
 /* ------------------------------------------------------------- keyboard ✦ */
 function fling(dir){
-  if(drag) return;
+  if(drag || mode === 'fly') return;
   const card = top(); if(!card) return;
   card.classList.add('live');
   vx = dir * 17; vy = -3.5; vr = dir * 1.1;
