@@ -92,6 +92,28 @@
     text-align:center; max-width:26ch; text-wrap:balance;
   }
 
+  /* ---------- ambient motion ----------
+     Everything here is texture, never content: the corona and the orbs turn,
+     the eclipse dashes crawl, the stars breathe. Glyph and lesson stay still.
+     Tune the two durations below to taste — larger is calmer. */
+  :root{ --spin:90s; --orbit:120s; --crawl:7s }
+
+  .corona,.orbs{ transform-box:view-box; transform-origin:150px 150px; will-change:transform }
+  .corona{ animation:spin var(--spin) linear infinite }
+  .orbs  { animation:spin var(--orbit) linear infinite reverse }  /* counter-turn = depth */
+  @keyframes spin{ to{ transform:rotate(360deg) } }
+
+  /* dotted eclipse orbits drift along their own arcs */
+  .crawl{ animation:crawl var(--crawl) linear infinite }
+  @keyframes crawl{ to{ stroke-dashoffset:var(--dash) } }
+
+  .twinkle{ animation:twinkle 6s ease-in-out infinite }
+  @keyframes twinkle{ 0%,100%{opacity:var(--o)} 50%{opacity:calc(var(--o) * .3)} }
+
+  @media (prefers-reduced-motion:reduce){
+    .corona,.orbs,.crawl,.twinkle{ animation:none }
+  }
+
   /* ---------- title card ---------- */
   .card.title .name{
     font-family:'Cinzel Decorative',serif; font-weight:700;
@@ -140,18 +162,25 @@ const G = {  /* glyphs drawn inside a 100×100 box */
   mars   : `<circle cx="41" cy="60" r="22"/><path d="M57,44 L83,18"/><path d="M83,18 H65"/><path d="M83,18 V36"/>`
 };
 
-const star = (cx,cy,s,o=.55) =>
- `<path d="M${cx},${cy-s} Q${cx+s*.2},${cy-s*.2} ${cx+s},${cy} Q${cx+s*.2},${cy+s*.2} ${cx},${cy+s} Q${cx-s*.2},${cy+s*.2} ${cx-s},${cy} Q${cx-s*.2},${cy-s*.2} ${cx},${cy-s} Z" fill="currentColor" stroke="none" opacity="${o}"/>`;
+/* tw=false pins a star still — used for the title card's centre, which anchors
+   the composition. Delays are derived from position so no two stars pulse together. */
+const star = (cx,cy,s,o=.55,tw=true) => {
+  const d = `M${cx},${cy-s} Q${cx+s*.2},${cy-s*.2} ${cx+s},${cy} Q${cx+s*.2},${cy+s*.2} ${cx},${cy+s} Q${cx-s*.2},${cy+s*.2} ${cx-s},${cy} Q${cx-s*.2},${cy-s*.2} ${cx},${cy-s} Z`;
+  const tw8 = tw
+    ? ` class="twinkle" style="--o:${o};animation-delay:${(((cx*7+cy*13)%61)/10).toFixed(1)}s"`
+    : '';
+  return `<path${tw8} d="${d}" fill="currentColor" stroke="none" opacity="${o}"/>`;
+};
 
 const MOTIF = {
   saturn : `<ellipse cx="150" cy="150" rx="72" ry="23" transform="rotate(-19 150 150)" opacity=".5"/>
             <ellipse cx="150" cy="150" rx="60" ry="18" transform="rotate(-19 150 150)" opacity=".3"/>`,
-  ketu   : `<path d="M78,224 Q150,150 224,76" stroke-dasharray="3 9" opacity=".5"/>${star(212,90,7)}${star(92,208,5,.4)}`,
+  ketu   : `<path class="crawl" style="--dash:-12" d="M78,224 Q150,150 224,76" stroke-dasharray="3 9" opacity=".5"/>${star(212,90,7)}${star(92,208,5,.4)}`,
   sun    : (()=>{let s='';for(let k=0;k<24;k++){const a=k*15*Math.PI/180;s+=`<line x1="${(150+Math.cos(a)*58).toFixed(1)}" y1="${(150+Math.sin(a)*58).toFixed(1)}" x2="${(150+Math.cos(a)*73).toFixed(1)}" y2="${(150+Math.sin(a)*73).toFixed(1)}" opacity=".38" stroke-width="1.6"/>`}return s})(),
   moon   : `${star(96,104,8)}${star(206,196,6)}${star(112,206,5,.4)}`,
   mercury: `<path d="M88,128 Q112,106 136,116" opacity=".45"/><path d="M212,128 Q188,106 164,116" opacity=".45"/>`,
   jupiter: `<path d="M110,214 Q150,182 190,214" opacity=".45"/><path d="M92,208 Q150,170 208,208" opacity=".28"/>`,
-  rahu   : `<circle cx="176" cy="132" r="62" opacity=".28"/><path d="M96,150 A54,54 0 0 1 204,150" stroke-dasharray="2 7" opacity=".4"/>`,
+  rahu   : `<circle cx="176" cy="132" r="62" opacity=".28"/><path class="crawl" style="--dash:9" d="M96,150 A54,54 0 0 1 204,150" stroke-dasharray="2 7" opacity=".4"/>`,
   venus  : (()=>{let s='';for(let k=0;k<8;k++){const a=k*45*Math.PI/180;s+=`<line x1="${(150+Math.cos(a)*46).toFixed(1)}" y1="${(150+Math.sin(a)*46).toFixed(1)}" x2="${(150+Math.cos(a)*76).toFixed(1)}" y2="${(150+Math.sin(a)*76).toFixed(1)}" opacity=".3"/>`}return s+star(150,74,9,.45)})(),
   mars   : `<path d="M74,226 L226,74" opacity=".3"/><path d="M74,74 L226,226" opacity=".18"/>${star(222,78,7,.5)}`
 };
@@ -172,7 +201,7 @@ function artwork(p,i){
       </pattern>
       <clipPath id="c${i}"><circle cx="150" cy="150" r="85"/></clipPath>
     </defs>
-    <g stroke-width="1.4">${rays}</g>
+    <g class="corona" stroke-width="1.4">${rays}</g>
     <circle cx="150" cy="150" r="140" stroke-width="1.6" opacity=".5"/>
     <circle cx="150" cy="150" r="134" stroke-width=".8" opacity=".35"/>
     <circle cx="150" cy="150" r="85" stroke-width="3"/>
@@ -203,16 +232,16 @@ function titleArt(){
   return `
   <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
        stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-    <g stroke-width="1.4">${rays}</g>
+    <g class="corona" stroke-width="1.4">${rays}</g>
     <circle cx="150" cy="150" r="140" stroke-width="1.6" opacity=".5"/>
     <circle cx="150" cy="150" r="134" stroke-width=".8" opacity=".35"/>
     <circle cx="150" cy="150" r="85" stroke-width="3"/>
     <circle cx="150" cy="150" r="78" stroke-width=".9" opacity=".55"/>
     <circle cx="150" cy="150" r="61" stroke-width="1.2" stroke-dasharray="2 8" opacity=".35"/>
-    ${orbs}
+    <g class="orbs">${orbs}</g>
     <circle cx="150" cy="150" r="25" stroke-width="2"/>
     <circle cx="150" cy="150" r="9" fill="currentColor" stroke="none"/>
-    ${star(150,150,17,.9)}
+    ${star(150,150,17,.9,false)}
   </svg>`;
 }
 
@@ -266,21 +295,27 @@ const AIR      = 0.992;   // horizontal drag
 
 function top(){ return els[cur] || null; }
 
+/* the deck is a ring: depth wraps, so the title card sits beneath Mars
+   exactly the way Ketu sits beneath Saturn — no blank frame at the seam */
 function layout(){
+  const n = els.length;
   els.forEach((el,idx)=>{
-    const d = idx - cur;
-    if(d < 0){ el.style.display = 'none'; return; }
+    const d = (idx - cur + n) % n;
+    if(d > 1){                       // buried — not rendered, transform parked
+      el.style.display = 'none';
+      el.style.transform = 'translate3d(0,0,0)';
+      return;
+    }
     el.style.display = '';
+    el.style.opacity = 1;
     if(d === 0){
       el.style.zIndex = 100;
-      el.style.opacity = 1;
       el.style.transform = `translate3d(${x}px,${y}px,0) rotate(${rot}deg)`;
       return;
     }
     /* squared deck: the next card sits exactly behind the top one and is
        revealed by occlusion alone — no offset, no scale, no tilt */
-    el.style.zIndex = 100 - d;
-    el.style.opacity = d > 1 ? 0 : 1;
+    el.style.zIndex = 99;
     el.style.transform = 'translate3d(0,0,0)';
   });
 }
@@ -321,20 +356,13 @@ function start(m){
 }
 function settle(){
   const card = top();
-  if(card){ card.classList.remove('live'); card.style.display = 'none'; }
-  cur++;
+  cur = (cur + 1) % els.length;
   x = y = rot = vx = vy = vr = 0; mode = null; raf = null;
 
-  if(cur >= els.length){                                  // wrap to the title card
-    cur = 0;
-    els.forEach(el=>{ el.classList.add('live'); el.style.display = ''; });
-    layout();
-    void deck.offsetWidth;                                // commit the reset untweened
-    els.forEach(el=>{ el.classList.remove('live'); });
-  }
-
+  layout();                                 // discarded card → buried, parked at origin
+  void deck.offsetWidth;                    // commit that reset untweened
+  if(card) card.classList.remove('live');
   const nt = top(); if(nt) nt.classList.remove('live');
-  layout();
 }
 function threshold(){ return deck.clientWidth * 0.30; }
 
