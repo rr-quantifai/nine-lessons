@@ -43,8 +43,7 @@
     width:min(100%, 400px, calc((100dvh - 96px) * 59 / 92));
     aspect-ratio:59/92;
     touch-action:none;
-    /* stack overhangs below by (0.02H + 30px); lift by half to optically centre it */
-    transform:translateY(calc(-1% - 17px));
+    /* cards are squared up, so the stack has no overhang and centres exactly */
   }
 
   .card{
@@ -267,9 +266,9 @@ const AIR      = 0.992;   // horizontal drag
 
 function top(){ return els[cur] || null; }
 
-function layout(prog = 0){
-  els.forEach((el,i)=>{
-    const d = i - cur;
+function layout(){
+  els.forEach((el,idx)=>{
+    const d = idx - cur;
     if(d < 0){ el.style.display = 'none'; return; }
     el.style.display = '';
     if(d === 0){
@@ -278,11 +277,11 @@ function layout(prog = 0){
       el.style.transform = `translate3d(${x}px,${y}px,0) rotate(${rot}deg)`;
       return;
     }
-    const depth = Math.max(0, d - prog);
+    /* squared deck: the next card sits exactly behind the top one and is
+       revealed by occlusion alone — no offset, no scale, no tilt */
     el.style.zIndex = 100 - d;
-    el.style.opacity = d > 2 ? 0 : 1;
-    el.style.transform =
-      `translate3d(0,${(depth*15).toFixed(2)}px,0) scale(${(1-depth*0.05).toFixed(4)}) rotate(${((i%2?1:-1)*depth*1.7).toFixed(2)}deg)`;
+    el.style.opacity = d > 1 ? 0 : 1;
+    el.style.transform = 'translate3d(0,0,0)';
   });
 }
 
@@ -306,7 +305,7 @@ function loop(t){
     vy += (-SPRING_K * y - SPRING_C * vy) * dt;
     vr += (-SPRING_K * rot - SPRING_C * vr) * dt;
     x += vx * dt; y += vy * dt; rot += vr * dt;
-    layout(Math.min(1, Math.abs(x) / threshold()));
+    layout();
     if(Math.hypot(x,y) < 0.4 && Math.abs(vx) < 0.4 && Math.abs(rot) < 0.3){
       x = y = rot = vx = vy = vr = 0;
       mode = null; layout(); raf = null; return;
@@ -366,7 +365,7 @@ deck.addEventListener('pointermove', e=>{
   x = e.clientX - drag.sx;
   y = (e.clientY - drag.sy) * 0.55;
   rot = (x / deck.clientWidth) * 15 * (drag.upper ? 1 : -1);
-  layout(Math.min(1, Math.abs(x) / threshold()));
+  layout();
 });
 function release(e){
   if(!drag || (e && e.pointerId !== drag.id)) return;
