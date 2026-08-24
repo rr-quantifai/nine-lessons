@@ -36,14 +36,12 @@
     padding:max(14px,env(safe-area-inset-top)) 18px max(14px,env(safe-area-inset-bottom));
   }
 
-  /* ---------- deck ---------- */
   .deck-wrap{flex:1 1 auto; min-height:0; display:flex; align-items:center; justify-content:center; padding:12px 0}
   .deck{
     position:relative; z-index:10;
     width:min(100%, 400px, calc((100dvh - 96px) * 59 / 92));
     aspect-ratio:59/92;
     touch-action:none;
-    /* cards are squared up, so the stack has no overhang and centres exactly */
   }
 
   .card{
@@ -60,7 +58,7 @@
     transition:transform .42s cubic-bezier(.22,1,.36,1), opacity .42s ease;
   }
   .card.live{transition:none}
-  .card::after{ /* paper grain */
+  .card::after{
     content:''; position:absolute; inset:0; pointer-events:none; opacity:.38;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23p)' opacity='.5'/%3E%3C/svg%3E");
     mix-blend-mode:multiply;
@@ -73,7 +71,6 @@
   .corner.tl{top:-4.5px; left:-4.5px} .corner.tr{top:-4.5px; right:-4.5px}
   .corner.bl{bottom:-4.5px; left:-4.5px} .corner.br{bottom:-4.5px; right:-4.5px}
 
-  /* three evenly spaced blocks: head · art · lesson */
   .head{flex:0 0 auto; text-align:center}
   .name{
     font-family:'Cinzel',serif; font-weight:600;
@@ -92,18 +89,13 @@
     text-align:center; max-width:26ch; text-wrap:balance;
   }
 
-  /* ---------- ambient motion ----------
-     Everything here is texture, never content: the corona and the orbs turn,
-     the eclipse dashes crawl, the stars breathe. Glyph and lesson stay still.
-     Tune the two durations below to taste — larger is calmer. */
   :root{ --spin:90s; --orbit:120s; --crawl:7s }
 
   .corona,.orbs{ transform-box:view-box; transform-origin:150px 150px; will-change:transform }
   .corona{ animation:spin var(--spin) linear infinite }
-  .orbs  { animation:spin var(--orbit) linear infinite reverse }  /* counter-turn = depth */
+  .orbs  { animation:spin var(--orbit) linear infinite reverse }
   @keyframes spin{ to{ transform:rotate(360deg) } }
 
-  /* dotted eclipse orbits drift along their own arcs */
   .crawl{ animation:crawl var(--crawl) linear infinite }
   @keyframes crawl{ to{ stroke-dashoffset:var(--dash) } }
 
@@ -114,7 +106,6 @@
     .corona,.orbs,.crawl,.twinkle{ animation:none }
   }
 
-  /* ---------- title card ---------- */
   .card.title .name{
     font-family:'Cinzel Decorative',serif; font-weight:700;
     font-size:clamp(24px,7vw,33px); letter-spacing:.04em; line-height:1.12;
@@ -136,7 +127,6 @@
 <script>
 (function(){
 "use strict";
-/* ------------------------------------------------------------------ data */
 const PLANETS = [
   {key:'saturn', name:'Saturn', sans:'Shani',       lesson:"Be disciplined",                  ink:'#232A4A', accent:'#5566A0', tint:'#EBEDF7'},
   {key:'ketu',   name:'Ketu',   sans:'Ketu',        lesson:"Learn to say no",                 ink:'#33393C', accent:'#7A8386', tint:'#EDF0F0'},
@@ -149,8 +139,7 @@ const PLANETS = [
   {key:'mars',   name:'Mars',   sans:'Mangala',     lesson:"Keep your body fit",              ink:'#7A2118', accent:'#B8493A', tint:'#FBE9E4'}
 ];
 
-/* ------------------------------------------------------- engraved artwork */
-const G = {  /* glyphs drawn inside a 100×100 box */
+const G = {
   saturn : `<path d="M34,16 V50"/><path d="M18,29 H50"/><path d="M34,50 C34,72 52,58 63,68 C73,77 68,90 55,88"/>`,
   ketu   : `<path d="M26,32 C26,76 74,76 74,32"/><circle cx="26" cy="24" r="7.5"/><circle cx="74" cy="24" r="7.5"/>`,
   sun    : `<circle cx="50" cy="50" r="29"/><circle cx="50" cy="50" r="6.5" fill="currentColor"/>`,
@@ -162,8 +151,6 @@ const G = {  /* glyphs drawn inside a 100×100 box */
   mars   : `<circle cx="41" cy="60" r="22"/><path d="M57,44 L83,18"/><path d="M83,18 H65"/><path d="M83,18 V36"/>`
 };
 
-/* tw=false pins a star still — used for the title card's centre, which anchors
-   the composition. Delays are derived from position so no two stars pulse together. */
 const star = (cx,cy,s,o=.55,tw=true) => {
   const d = `M${cx},${cy-s} Q${cx+s*.2},${cy-s*.2} ${cx+s},${cy} Q${cx+s*.2},${cy+s*.2} ${cx},${cy+s} Q${cx-s*.2},${cy+s*.2} ${cx-s},${cy} Q${cx-s*.2},${cy-s*.2} ${cx},${cy-s} Z`;
   const tw8 = tw
@@ -214,11 +201,9 @@ function artwork(p,i){
   </svg>`;
 }
 
-/* ------------------------------------------------------------- build deck */
 const deck = document.getElementById('deck');
 const els = [];
 
-/* navagraha wheel: nine orbs orbiting a central disc */
 function titleArt(){
   let rays='', orbs='';
   for(let k=0;k<72;k++){
@@ -245,7 +230,6 @@ function titleArt(){
   </svg>`;
 }
 
-/* --- card zero: the title --- */
 const title = document.createElement('article');
 title.className = 'card title';
 title.style.setProperty('--ink','#3B3050');
@@ -280,28 +264,25 @@ PLANETS.forEach((p,i)=>{
   els.push(el);
 });
 
-/* ------------------------------------------------------------- physics ✦ */
 let cur = 0;
-let x = 0, y = 0, rot = 0;          // top-card state
-let vx = 0, vy = 0, vr = 0;         // velocity, px per frame
-let mode = null;                    // 'fly' | 'spring'
+let x = 0, y = 0, rot = 0;
+let vx = 0, vy = 0, vr = 0;
+let mode = null;
 let raf = null, lastT = 0;
 let drag = null;
 
-const SPRING_K = 0.155;   // stiffness
-const SPRING_C = 0.72;    // damping  (ζ ≈ 0.91 — snappy, tiny overshoot)
-const GRAVITY  = 0.55;    // px/frame² once the card is airborne
-const AIR      = 0.992;   // horizontal drag
+const SPRING_K = 0.155;
+const SPRING_C = 0.72;
+const GRAVITY  = 0.55;
+const AIR      = 0.992;
 
 function top(){ return els[cur] || null; }
 
-/* the deck is a ring: depth wraps, so the title card sits beneath Mars
-   exactly the way Ketu sits beneath Saturn — no blank frame at the seam */
 function layout(){
   const n = els.length;
   els.forEach((el,idx)=>{
     const d = (idx - cur + n) % n;
-    if(d > 1){                       // buried — not rendered, transform parked
+    if(d > 1){
       el.style.display = 'none';
       el.style.transform = 'translate3d(0,0,0)';
       return;
@@ -313,15 +294,13 @@ function layout(){
       el.style.transform = `translate3d(${x}px,${y}px,0) rotate(${rot}deg)`;
       return;
     }
-    /* squared deck: the next card sits exactly behind the top one and is
-       revealed by occlusion alone — no offset, no scale, no tilt */
     el.style.zIndex = 99;
     el.style.transform = 'translate3d(0,0,0)';
   });
 }
 
 function loop(t){
-  const dt = Math.min(2.2, (t - lastT) / 16.667) || 1;  // frames elapsed
+  const dt = Math.min(2.2, (t - lastT) / 16.667) || 1;
   lastT = t;
 
   if(mode === 'fly'){
@@ -335,7 +314,6 @@ function loop(t){
       return;
     }
   } else if(mode === 'spring'){
-    // damped harmonic oscillator toward (0,0,0)
     vx += (-SPRING_K * x - SPRING_C * vx) * dt;
     vy += (-SPRING_K * y - SPRING_C * vy) * dt;
     vr += (-SPRING_K * rot - SPRING_C * vr) * dt;
@@ -359,18 +337,17 @@ function settle(){
   cur = (cur + 1) % els.length;
   x = y = rot = vx = vy = vr = 0; mode = null; raf = null;
 
-  layout();                                 // discarded card → buried, parked at origin
-  void deck.offsetWidth;                    // commit that reset untweened
+  layout();
+  void deck.offsetWidth;
   if(card) card.classList.remove('live');
   const nt = top(); if(nt) nt.classList.remove('live');
 }
 function threshold(){ return deck.clientWidth * 0.30; }
 
-/* ------------------------------------------------------------ gestures ✦ */
 deck.addEventListener('pointerdown', e=>{
   if(raf) cancelAnimationFrame(raf);
   raf = null;
-  if(mode === 'fly') settle();          // finish the discard, then grab the next card
+  if(mode === 'fly') settle();
   mode = null;
 
   const card = top(); if(!card) return;
@@ -386,7 +363,7 @@ deck.addEventListener('pointerdown', e=>{
 deck.addEventListener('pointermove', e=>{
   if(!drag || e.pointerId !== drag.id) return;
   const now = performance.now(), dt = Math.max(8, now - drag.pt);
-  drag.vx = (e.clientX - drag.px) / dt;      // px per ms
+  drag.vx = (e.clientX - drag.px) / dt;
   drag.vy = (e.clientY - drag.py) / dt;
   drag.px = e.clientX; drag.py = e.clientY; drag.pt = now;
 
@@ -397,7 +374,7 @@ deck.addEventListener('pointermove', e=>{
 });
 function release(e){
   if(!drag || (e && e.pointerId !== drag.id)) return;
-  const V  = drag.vx * 16.667;                // → px per frame
+  const V  = drag.vx * 16.667;
   const VY = drag.vy * 16.667;
   const flung = Math.abs(drag.vx) > 0.42 || Math.abs(x) > threshold();
   drag = null;
@@ -412,7 +389,6 @@ function release(e){
 deck.addEventListener('pointerup', release);
 deck.addEventListener('pointercancel', ()=>{ if(drag){ drag=null; start('spring'); } });
 
-/* ------------------------------------------------------------- keyboard ✦ */
 function fling(dir){
   if(drag || mode === 'fly') return;
   const card = top(); if(!card) return;
